@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
@@ -10,10 +10,7 @@ namespace Com.MyCompany.MyGame
     {
         #region Private Serializable Fields
 
-        /// <summary>
-        /// The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created.
-        /// </summary>
-        [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
+        [Tooltip("ë°©ë‹¹ ìµœëŒ€ í”Œë ˆì´ì–´ ìˆ˜.ë°©ì´ ê°€ë“ ì°¨ë©´ ìƒˆë¡œìš´ í”Œë ˆì´ì–´ê°€ ì°¸ì—¬í•  ìˆ˜ ì—†ìœ¼ë¯€ë¡œ ìƒˆ ë°©ì´ ìƒì„±ë©ë‹ˆë‹¤")]
         [SerializeField]
         private byte maxPlayersPerRoom = 4;
 
@@ -26,74 +23,74 @@ namespace Com.MyCompany.MyGame
 
         #endregion
 
+
         #region MonoBehaviour CallBacks
 
         void Awake()
         {
             // #Critical
-            // ÀÌ°ÍÀº ¸¶½ºÅÍ Å¬¶óÀÌ¾ğÆ®¿¡¼­ PhotonNetwork.LoadLevel()À» »ç¿ëÇÒ ¼ö ÀÖ°í °°Àº ¹æ¿¡ ÀÖ´Â ¸ğµç Å¬¶óÀÌ¾ğÆ®°¡ ÀÚµ¿À¸·Î ·¹º§À» µ¿±âÈ­ÇÒ ¼ö ÀÖµµ·Ï ÇÕ´Ï´Ù.
+            // ì´ê²ƒì€ ë§ˆìŠ¤í„° í´ë¼ì´ì–¸íŠ¸ì—ì„œ PhotonNetwork.LoadLevel()ì„ ì‚¬ìš©í•  ìˆ˜ ìˆê³  ê°™ì€ ë°©ì— ìˆëŠ” ëª¨ë“  í´ë¼ì´ì–¸íŠ¸ê°€ ìë™ìœ¼ë¡œ ë ˆë²¨ì„ ë™ê¸°í™”í•  ìˆ˜ ìˆë„ë¡ í•©ë‹ˆë‹¤.
             PhotonNetwork.AutomaticallySyncScene = true;
         }
 
 
         /// <summary>
-        ///ÃÊ±âÈ­ ´Ü°è¿¡¼­ Unity¿¡ ÀÇÇØ GameObject¿¡¼­ È£ÃâµÇ´Â MonoBehaviour ¸Ş¼­µåÀÔ´Ï´Ù.
+        ///ì´ˆê¸°í™” ë‹¨ê³„ì—ì„œ Unityì— ì˜í•´ GameObjectì—ì„œ í˜¸ì¶œë˜ëŠ” MonoBehaviour ë©”ì„œë“œì…ë‹ˆë‹¤.
         /// </summary>
         void Start()
         {
             Connect();
         }
 
-
         #endregion
+
 
         #region MonoBehaviourPunCallbacks Callbacks
         public override void OnConnectedToMaster()
         {
-            Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
+            Debug.Log("PUN ê¸°ì´ˆ íŠœí† ë¦¬ì–¼ / ëŸ°ì²˜: PUNì—ì„œ OnConnectedToMaster()ë¥¼ í˜¸ì¶œí–ˆìŠµë‹ˆë‹¤.");
             PhotonNetwork.JoinRandomRoom();
         }
 
 
         public override void OnDisconnected(DisconnectCause cause)
         {
-            Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {0}", cause);
+            Debug.LogWarningFormat("PUN ê¸°ë³¸ íŠœí† ë¦¬ì–¼ / ëŸ°ì²˜: OnDisconnected()ê°€ ì´ìœ  {0}ì™€ í•¨ê»˜ PUNì—ì„œ í˜¸ì¶œë˜ì—ˆìŠµë‹ˆë‹¤.", cause);
         }
 
         public override void OnJoinRandomFailed(short returnCode, string message)
         {
-            Debug.Log("PUN Basics Tutorial/Launcher:OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
+            Debug.Log("PUN ê¸°ì´ˆ íŠœí† ë¦¬ì–¼ / ëŸ°ì²˜:OnJoinRandomFailed()ê°€ PUNì— ì˜í•´ â€‹â€‹í˜¸ì¶œë˜ì—ˆìŠµë‹ˆë‹¤.ì‚¬ìš© ê°€ëŠ¥í•œ ì„ì˜ì˜ ë°©ì´ ì—†ìœ¼ë¯€ë¡œ í•˜ë‚˜ ë§Œë“­ë‹ˆë‹¤.\ní˜¸ì¶œ: PhotonNetwork.CreateRoom");
 
-            // #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
-            PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+            // #Critical: ìš°ë¦¬ëŠ” ì„ì˜ì˜ ë°©ì— ì°¸ì—¬í•˜ëŠ” ë° ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. ì•„ë¬´ë„ ì—†ê±°ë‚˜ ëª¨ë‘ ì°¼ì„ ìˆ˜ ìˆìŠµë‹ˆë‹¤. ê±±ì • ë§ˆì„¸ìš”. ìƒˆ ë°©ì„ ë§Œë“­ë‹ˆë‹¤.
+                        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
         }
 
         public override void OnJoinedRoom()
         {
-            Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
+            Debug.Log("PUN ê¸°ì´ˆ íŠœí† ë¦¬ì–¼ / ëŸ°ì²˜: PUNì— ì˜í•´ â€‹â€‹í˜¸ì¶œëœ OnJoinedRoom().ì´ì œ ì´ í´ë¼ì´ì–¸íŠ¸ëŠ” ë°©ì— ìˆìŠµë‹ˆë‹¤.");
         }
         #endregion
 
+
+
         #region Public Methods
-
-
-
         /// <summary>
-        /// ¿¬°á ÇÁ·Î¼¼½º¸¦ ½ÃÀÛÇÕ´Ï´Ù.
-        /// - ÀÌ¹Ì ¿¬°áµÇ¾î ÀÖ´Â °æ¿ì ÀÓÀÇÀÇ ¹æ¿¡ Âü¿©¸¦ ½ÃµµÇÕ´Ï´Ù.
-        /// - ¾ÆÁ÷ ¿¬°áµÇÁö ¾ÊÀº °æ¿ì ÀÌ ¾ÖÇÃ¸®ÄÉÀÌ¼Ç ÀÎ½ºÅÏ½º¸¦ Photon Cloud Network¿¡ ¿¬°áÇÕ´Ï´Ù.
+        /// ì—°ê²° í”„ë¡œì„¸ìŠ¤ë¥¼ ì‹œì‘í•©ë‹ˆë‹¤.
+        /// - ì´ë¯¸ ì—°ê²°ë˜ì–´ ìˆëŠ” ê²½ìš° ì„ì˜ì˜ ë°©ì— ì°¸ì—¬ë¥¼ ì‹œë„í•©ë‹ˆë‹¤.
+        /// - ì•„ì§ ì—°ê²°ë˜ì§€ ì•Šì€ ê²½ìš° ì´ ì• í”Œë¦¬ì¼€ì´ì…˜ ì¸ìŠ¤í„´ìŠ¤ë¥¼ Photon Cloud Networkì— ì—°ê²°í•©ë‹ˆë‹¤.
         /// </summary>
         public void Connect()
         {
-            // ¿¬°áµÇ¾ú´ÂÁö ¿©ºÎ¸¦ È®ÀÎÇÏ°í ¿¬°áµÇ¾î ÀÖÀ¸¸é °¡ÀÔÇÏ°í ±×·¸Áö ¾ÊÀ¸¸é ¼­¹ö¿¡ ¿¬°áÀ» ½ÃÀÛÇÕ´Ï´Ù.
+            // ì—°ê²°ë˜ì—ˆëŠ”ì§€ ì—¬ë¶€ë¥¼ í™•ì¸í•˜ê³  ì—°ê²°ë˜ì–´ ìˆìœ¼ë©´ ê°€ì…í•˜ê³  ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ ì„œë²„ì— ì—°ê²°ì„ ì‹œì‘í•©ë‹ˆë‹¤.
             if (PhotonNetwork.IsConnected)
             {
-                // #Critical ÀÌ ½ÃÁ¡¿¡¼­ ·£´ı ·ë¿¡ Âü¿©¸¦ ½ÃµµÇØ¾ß ÇÕ´Ï´Ù.½ÇÆĞÇÏ¸é OnJoinRandomFailed()¿¡¼­ ¾Ë¸²À» ¹Ş°í ÇÏ³ª¸¦ ¸¸µì´Ï´Ù.
+                // #Critical ì´ ì‹œì ì—ì„œ ëœë¤ ë£¸ì— ì°¸ì—¬ë¥¼ ì‹œë„í•´ì•¼ í•©ë‹ˆë‹¤.ì‹¤íŒ¨í•˜ë©´ OnJoinRandomFailed()ì—ì„œ ì•Œë¦¼ì„ ë°›ê³  í•˜ë‚˜ë¥¼ ë§Œë“­ë‹ˆë‹¤.
                 PhotonNetwork.JoinRandomRoom();
             }
             else
             {
-                // #Critical, ¿ì¸®´Â °¡Àå ¸ÕÀú Photon Online Server¿¡ ¿¬°áÇØ¾ß ÇÕ´Ï´Ù.
+                // #Critical, ìš°ë¦¬ëŠ” ê°€ì¥ ë¨¼ì € Photon Online Serverì— ì—°ê²°í•´ì•¼ í•©ë‹ˆë‹¤.
                 PhotonNetwork.GameVersion = gameVersion;
                 PhotonNetwork.ConnectUsingSettings();
             }
