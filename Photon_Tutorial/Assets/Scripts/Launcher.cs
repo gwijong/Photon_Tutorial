@@ -13,6 +13,12 @@ namespace Com.MyCompany.MyGame
         [Tooltip("방당 최대 플레이어 수.방이 가득 차면 새로운 플레이어가 참여할 수 없으므로 새 방이 생성됩니다")]
         [SerializeField]
         private byte maxPlayersPerRoom = 4;
+        [Tooltip("The Ui Panel to let the user enter name, connect and play")]
+        [SerializeField]
+        private GameObject controlPanel;
+        [Tooltip("The UI Label to inform the user that the connection is in progress")]
+        [SerializeField]
+        private GameObject progressLabel;
 
         #endregion
 
@@ -39,7 +45,8 @@ namespace Com.MyCompany.MyGame
         /// </summary>
         void Start()
         {
-            Connect();
+            progressLabel.SetActive(false);
+            controlPanel.SetActive(true);
         }
 
         #endregion
@@ -82,6 +89,8 @@ namespace Com.MyCompany.MyGame
         /// </summary>
         public void Connect()
         {
+            progressLabel.SetActive(true);
+            controlPanel.SetActive(false);
             // 연결되었는지 여부를 확인하고 연결되어 있으면 가입하고 그렇지 않으면 서버에 연결을 시작합니다.
             if (PhotonNetwork.IsConnected)
             {
